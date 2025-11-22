@@ -2,44 +2,46 @@
 
 ## Prerequisites
 - GitHub account (✅ You have this)
-- Render account (free): https://render.com
+- Railway account (free): https://railway.app
 - Vercel account (free): https://vercel.com
 
 ---
 
-## 📦 STEP 1: Deploy Backend to Render
+## 📦 STEP 1: Deploy Backend to Railway
 
-### 1.1 Create Render Account
-1. Go to https://render.com
-2. Sign up with your GitHub account
-3. Authorize Render to access your repositories
+### 1.1 Create Railway Account
+1. Go to https://railway.app
+2. Click "Login" → Sign in with GitHub
+3. Authorize Railway to access your repositories
 
 ### 1.2 Deploy Backend
-1. **Dashboard**: Click "New +" → "Web Service"
-2. **Connect Repository**: 
-   - Select `BharathVarma2907/inventory_management_app`
-   - Click "Connect"
-3. **Configure Service**:
-   - **Name**: `inventory-backend` (or your choice)
-   - **Region**: Oregon (US West) - closest free region
-   - **Branch**: `main`
-   - **Root Directory**: Leave blank
-   - **Runtime**: Node
+1. **Dashboard**: Click "New Project"
+2. **Choose Source**: Select "Deploy from GitHub repo"
+3. **Connect Repository**: 
+   - Find and select `BharathVarma2907/inventory_management_app`
+   - Click on the repository
+4. **Add Service**: Railway will detect your app
+   - Click "Add variables" (if prompted)
+5. **Configure Environment Variables**:
+   - Click on your service → "Variables" tab
+   - Add these variables:
+     - `NODE_ENV` = `production`
+     - `PORT` = `5000`
+6. **Configure Build Settings**:
+   - Click "Settings" tab
    - **Build Command**: `cd backend && npm install`
    - **Start Command**: `cd backend && npm start`
-   - **Instance Type**: Free
-4. **Environment Variables**: Click "Advanced" → Add:
-   - `NODE_ENV` = `production`
-   - `PORT` = `5000`
-5. **Create Web Service**: Click the button at the bottom
+   - **Root Directory**: Leave blank (Railway auto-detects)
+7. **Deploy**: Railway will automatically deploy
 
-### 1.3 Wait for Deployment (3-5 minutes)
-- Watch the logs as it builds and starts
+### 1.3 Wait for Deployment (2-3 minutes)
+- Watch the deployment logs in the "Deployments" tab
 - When you see "✅ Server running on port 5000", it's live!
-- Copy your backend URL (e.g., `https://inventory-backend-xxxx.onrender.com`)
+- Go to "Settings" → "Networking" → "Generate Domain"
+- Copy your backend URL (e.g., `https://inventory-backend-production.up.railway.app`)
 
 ### 1.4 Test Backend
-Test in browser: `https://your-backend-url.onrender.com/api/products`
+Test in browser: `https://your-backend-url.railway.app/api/products`
 You should see JSON response with products.
 
 ---
@@ -74,7 +76,7 @@ You should see JSON response with products.
 ### 2.4 Test Frontend
 1. Open your Vercel URL in browser
 2. You should see the premium inventory UI
-3. Products should load from your Render backend
+3. Products should load from your Railway backend
 
 ---
 
@@ -83,10 +85,10 @@ You should see JSON response with products.
 ### Backend Tests:
 ```bash
 # Get all products
-curl https://your-backend-url.onrender.com/api/products
+curl https://your-backend-url.railway.app/api/products
 
 # Search products
-curl https://your-backend-url.onrender.com/api/products/search?query=laptop
+curl https://your-backend-url.railway.app/api/products/search?query=laptop
 ```
 
 ### Frontend Tests:
@@ -112,11 +114,11 @@ I've completed the Product Inventory Management System project. Here are the lin
 
 🔗 GitHub Repository: https://github.com/BharathVarma2907/inventory_management_app
 🌐 Live Frontend: https://your-frontend-url.vercel.app
-🔌 Live Backend API: https://your-backend-url.onrender.com/api/products
+🔌 Live Backend API: https://your-backend-url.railway.app/api/products
 
 Tech Stack:
-- Backend: Node.js, Express, SQLite
-- Frontend: React, Vite, Tailwind CSS
+- Backend: Node.js, Express, SQLite (deployed on Railway)
+- Frontend: React, Vite, Tailwind CSS (deployed on Vercel)
 - Features: CRUD operations, CSV import/export, inventory history, search & filter
 
 The application is fully functional and ready for testing.
@@ -131,12 +133,12 @@ Best regards,
 
 ### Backend Issues:
 **Problem**: Backend returns 500 error
-- **Solution**: Check Render logs for errors
-- **Fix**: Ensure environment variables are set correctly
+- **Solution**: Check Railway logs for errors (Deployments tab → View Logs)
+- **Fix**: Ensure environment variables are set correctly in Variables tab
 
 **Problem**: Backend is slow (first request)
-- **Reason**: Render free tier spins down after 15 min of inactivity
-- **Fix**: First request takes ~30 seconds to wake up (this is normal)
+- **Reason**: Railway free tier may sleep after inactivity
+- **Fix**: First request takes ~10-20 seconds to wake up (this is normal)
 
 ### Frontend Issues:
 **Problem**: Products don't load
@@ -156,19 +158,19 @@ Best regards,
 2. Add your domain (e.g., `inventory.yourdomain.com`)
 3. Follow DNS configuration instructions
 
-### Render Custom Domain:
-1. Go to Render dashboard → Your service → Settings → Custom Domain
-2. Add your domain
-3. Update DNS records
+### Railway Custom Domain:
+1. Go to Railway dashboard → Your service → Settings → Networking
+2. Click "Custom Domain"
+3. Add your domain and update DNS records
 
 ---
 
 ## 📊 Monitor Your Apps
 
-### Render Dashboard:
-- View logs: See all backend requests and errors
-- Metrics: CPU, memory usage
-- Health checks: Automatic uptime monitoring
+### Railway Dashboard:
+- View logs: See all backend requests and errors (Deployments → View Logs)
+- Metrics: CPU, memory, network usage (Metrics tab)
+- Deployments: Track all deployment history
 
 ### Vercel Dashboard:
 - Analytics: See visitor stats
@@ -187,7 +189,7 @@ git add .
 git commit -m "Your changes"
 git push
 
-# Both Render and Vercel will auto-deploy!
+# Both Railway and Vercel will auto-deploy!
 ```
 
 ---
@@ -196,7 +198,7 @@ git push
 
 Before submitting:
 
-- [ ] Backend deployed to Render and accessible
+- [ ] Backend deployed to Railway and accessible
 - [ ] Frontend deployed to Vercel and accessible
 - [ ] Frontend can fetch data from backend
 - [ ] All CRUD operations work (test each one)
